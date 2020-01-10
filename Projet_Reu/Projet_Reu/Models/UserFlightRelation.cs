@@ -16,7 +16,9 @@ namespace Projet_Reu.Models
         [ForeignKey("FK_UserId")]
         public int UserId { get; set; }
         
-        [ForeignKey("FK_FlightId")]
-        public int FlightId { get; set; }
+        [ForeignKey("FK_ClasseId")]
+        public int ClasseId { get; set; }
+
+        public DateTime ReservationDate { get; set; }
     }
 }

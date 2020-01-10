@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Projet_Reu.Models;
 
 namespace Projet_Reu.Migrations
 {
     [DbContext(typeof(ReuContext))]
-    partial class ReuContextModelSnapshot : ModelSnapshot
+    [Migration("20200110094729_Projet_Reu.Models.ReuContext-bis")]
+    partial class Projet_ReuModelsReuContextbis
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -19,40 +21,17 @@ namespace Projet_Reu.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Projet_Reu.Models.Classe", b =>
-                {
-                    b.Property<long>("ClasseId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("FlightId");
-
-                    b.Property<string>("Name");
-
-                    b.Property<int>("NbSiege");
-
-                    b.Property<int>("NbSiegeOccupes");
-
-                    b.Property<decimal>("Price");
-
-                    b.HasKey("ClasseId");
-
-                    b.ToTable("Classes");
-                });
-
             modelBuilder.Entity("Projet_Reu.Models.Flight", b =>
                 {
                     b.Property<long>("FlightId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Arrivee");
-
                     b.Property<DateTime>("DateFlight");
 
-                    b.Property<string>("Depart");
-
                     b.Property<string>("Name");
+
+                    b.Property<int>("NbSiege");
 
                     b.HasKey("FlightId");
 
@@ -82,9 +61,11 @@ namespace Projet_Reu.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ClasseId");
+                    b.Property<string>("Classe");
 
-                    b.Property<DateTime>("ReservationDate");
+                    b.Property<int>("FlightId");
+
+                    b.Property<decimal>("Price");
 
                     b.Property<int>("UserId");
 
