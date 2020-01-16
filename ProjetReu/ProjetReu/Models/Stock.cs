@@ -17,5 +17,7 @@ namespace ProjetReu.Models
         public int ClasseId { get; set; }
 
         public int NbStock { get; set; }
+
+        public DateTime DateStock { get; set; }
     }
 }
