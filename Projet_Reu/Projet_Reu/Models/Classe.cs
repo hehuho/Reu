@@ -19,9 +19,7 @@ namespace Projet_Reu.Models
         public string Name { get; set; }
 
         public int NbSiege { get; set; }
-
-        public int NbSiegeOccupes { get; set; }
-
+        
         public decimal Price { get; set; }
         
     }

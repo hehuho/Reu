@@ -7,17 +7,18 @@ using System.Threading.Tasks;
 
 namespace Projet_Reu.Models
 {
-    public class Flight
+    public class Billet
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long FlightId { get; set; }
+        public long BilletId { get; set; }
 
-        public string Name { get; set; }
-
-        public string Depart { get; set; }
-
-        public string Arrivee { get; set; }
+        [ForeignKey("FK_UserId")]
+        public int UserId { get; set; }
         
+        [ForeignKey("FK_ClasseId")]
+        public int ClasseId { get; set; }
+
+        public DateTime ReservationDate { get; set; }
     }
 }
