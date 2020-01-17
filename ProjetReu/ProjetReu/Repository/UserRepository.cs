@@ -23,7 +23,7 @@ namespace ProjetReu.Repository
         public void addUser(User user)
         {
             _reuContext.Add(user);
-            _reuContext.SaveChanges(); ;
+            _reuContext.SaveChanges();
         }
     }
 }

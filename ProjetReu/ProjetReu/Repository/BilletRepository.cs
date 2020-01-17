@@ -18,6 +18,7 @@ namespace ProjetReu.Repository
         public void addBillet(Billet billet)
         {
             _reuContext.Add(billet);
+            _reuContext.SaveChanges();
         }
     }
 }

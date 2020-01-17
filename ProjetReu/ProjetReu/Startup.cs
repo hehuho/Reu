@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using ProjetReu.Controllers;
 using ProjetReu.Models;
 using ProjetReu.Repository;
 
@@ -30,11 +31,15 @@ namespace ProjetReu
         {
             services.AddDbContext<ReuContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:ReuDB"]));
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddControllersAsServices();
+            
+            //services.AddScoped<IFlightRepository, FlightRepository>();
             services.AddScoped<IFlightRepository, FlightRepository>();
             services.AddScoped<IClasseRepository, ClasseRepository>();
             services.AddScoped<IStockRepository, StockRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IBilletRepository, BilletRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,7 +53,13 @@ namespace ProjetReu
             {
                 app.UseHsts();
             }
-            
+
+            app.UseCors(builder => builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
+
             app.UseMvc();
         }
     }
