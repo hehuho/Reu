@@ -50,41 +50,49 @@ namespace ProjetReu.Controllers
                 DateTime dateValue;
                 if (DateTime.TryParse(date, out dateValue))
                 {
-                    List<Flight> flightList = _flightRepository.getFlightList();
-                    List<ViewFlightClasse> viewFlightClasseList = new List<ViewFlightClasse>();
-                    foreach (var flightListItem in flightList)
+                    if(dateValue >= DateTime.Now.Date)
                     {
-                        ViewFlightClasse viewFlightClasse = new ViewFlightClasse();
-                        viewFlightClasse.FlightId = Convert.ToInt32(flightListItem.FlightId);
-                        viewFlightClasse.FlightName = flightListItem.Name;
-                        viewFlightClasse.ClasseList = new List<Classe>();
-                        List<Classe> classeList = _classeRepository.getClasseList().Where(cl => cl.FlightId == flightListItem.FlightId).ToList();
-                        foreach (var classeListItem in classeList)
+                        List<Flight> flightList = _flightRepository.getFlightList();
+                        List<ViewFlightClasse> viewFlightClasseList = new List<ViewFlightClasse>();
+                        foreach (var flightListItem in flightList)
                         {
-                            Stock stock = _stockRepository.getListStock()
-                                                          .Where(st => st.ClasseId == classeListItem.ClasseId
-                                                                    && st.DateStock == dateValue)
-                                                          .SingleOrDefault();
-
-                            if (stock == null)
+                            ViewFlightClasse viewFlightClasse = new ViewFlightClasse();
+                            viewFlightClasse.FlightId = Convert.ToInt32(flightListItem.FlightId);
+                            viewFlightClasse.FlightName = flightListItem.Name;
+                            viewFlightClasse.ClasseList = new List<Classe>();
+                            List<Classe> classeList = _classeRepository.getClasseList().Where(cl => cl.FlightId == flightListItem.FlightId).ToList();
+                            foreach (var classeListItem in classeList)
                             {
-                                Stock stockToAdd = new Stock();
-                                stockToAdd.ClasseId = Convert.ToInt32(classeListItem.ClasseId);
-                                stockToAdd.NbStock = classeListItem.NbSiege;
-                                stockToAdd.DateStock = dateValue;
-                                _stockRepository.AddStock(stockToAdd);
-                            }
-                            
-                            if(stock != null && stock.NbStock > 0)
-                                viewFlightClasse.ClasseList.Add(classeListItem);
-                                
+                                Stock stock = _stockRepository.getListStock()
+                                                              .Where(st => st.ClasseId == classeListItem.ClasseId
+                                                                        && st.DateStock == dateValue)
+                                                              .SingleOrDefault();
 
+                                if (stock == null)
+                                {
+                                    Stock stockToAdd = new Stock();
+                                    stockToAdd.ClasseId = Convert.ToInt32(classeListItem.ClasseId);
+                                    stockToAdd.NbStock = classeListItem.NbSiege;
+                                    stockToAdd.DateStock = dateValue;
+                                    _stockRepository.AddStock(stockToAdd);
+
+                                    viewFlightClasse.ClasseList.Add(classeListItem);
+                                }
+
+                                if (stock != null && stock.NbStock > 0)
+                                    viewFlightClasse.ClasseList.Add(classeListItem);
+
+
+                            }
+
+                            viewFlightClasseList.Add(viewFlightClasse);
                         }
 
-                        viewFlightClasseList.Add(viewFlightClasse);
+                        return Ok(viewFlightClasseList);
                     }
+                    else
+                        return BadRequest("La date saisie est antérieur à la date du jour !");
 
-                    return Ok(viewFlightClasseList);
                 }
                 else
                     return BadRequest("La date n'est pas correctement saisie !");
