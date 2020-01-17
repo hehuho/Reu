@@ -91,15 +91,16 @@ namespace ProjetReu.Controllers
                         return Ok(viewFlightClasseList);
                     }
                     else
-                        return BadRequest("La date saisie est antérieur à la date du jour !");
+                        return BadRequest(new { message = "La date saisie est antérieure à la date du jour !" });
+
 
                 }
                 else
-                    return BadRequest("La date n'est pas correctement saisie !");
+                    return BadRequest(new { message = "La date n'est pas correctement saisie !" });
 
             }
             else
-                return BadRequest("Le Json dans le body ne contient pas de clé Date !");
+                return BadRequest(new { message = "Le Json dans le body ne contient pas de clé Date !" });
         }
 
         // POST api/reservation/submit
@@ -180,18 +181,18 @@ namespace ProjetReu.Controllers
 
                         _billetRepository.addBillet(billetToAdd);
 
-                        return Ok("Réservation effectuée avec succès !!!!");
+                        return Ok(new { message = "Réservation effectuée avec succès !!!!" });
                     }
                     else
-                        return BadRequest("Il n'y a plus de place disponible pour ce vol !!!");
+                        return BadRequest(new { message = "Il n'y a plus de place disponible pour ce vol !!!" });
 
                 }
                 else
-                    return BadRequest("Une des valeurs rentrées n'est pas au bon format !");
+                    return BadRequest(new { message = "Une des valeurs rentrées n'est pas au bon format !" });
 
             }
             else
-                return BadRequest("Le JSON envoyé n'est pas formaté correctement !");
+                return BadRequest(new { message = "Le JSON envoyé n'est pas formaté correctement !" });
 
         }
 
