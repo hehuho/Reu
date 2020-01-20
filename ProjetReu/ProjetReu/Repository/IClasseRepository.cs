@@ -9,5 +9,6 @@ namespace ProjetReu.Repository
     public interface IClasseRepository
     {
         List<Classe> getClasseList();
+     
     }
 }

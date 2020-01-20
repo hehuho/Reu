@@ -1,0 +1,43 @@
+<form [formGroup]="formGroup" (ngSubmit)="validation()">
+    <div class="form-group row">
+      <label for="nom" class="col-sm-2 offset-sm-2">Nom</label>
+      <input type="text" class="form-control col-sm-3 offset-sm-1" id="nom" placeholder="" formControlName="nom" required>
+
+    </div>
+    <div class="form-group row">
+      <label for="prenom" class="col-sm-2 offset-sm-2">Prénom</label>
+      <input type="text" class="form-control col-sm-3 offset-sm-1" id="prenom" placeholder="" formControlName="prenom">
+    </div>
+
+    <div class="form-group row">
+        <label for="tel" class="col-sm-2 offset-sm-2">téléphone</label>
+        <input type="number" class="form-control col-sm-3 offset-sm-1" id="tel" placeholder="+33" formControlName="tel">
+      </div>
+      <div class="form-group row">
+        <label for="add1" class="col-sm-2 offset-sm-2">Adresse</label>
+        <input type="number" class="form-control col-sm-3 offset-sm-1" id="add1" placeholder="Numéro" formControlName="add1">
+      </div>
+
+      <div class="form-group row">
+        <label for="add2" class="col-sm-2 offset-sm-2"></label>
+        <input type="text" class="form-control col-sm-3 offset-sm-1" id="add2" placeholder="Rue" formControlName="add2">
+      </div>
+      
+      <div class="form-group row">
+        <label for="add3" class="col-sm-2 offset-sm-2"></label>
+        <input type="number" class="form-control col-sm-3 offset-sm-1" id="add3" placeholder="code postal" formControlName="add3">
+      </div>
+
+      <div class="form-group row">
+        <label for="date" class="col-sm-2 offset-sm-2">Date de départ</label>
+        
+          <input class="form-control col-sm-3 offset-sm-1" type="date" id="date" formControlName="date">
+     </div>
+        
+    
+    <div class="row">
+    <button type="submit" class="btn btn-primary col-sm-2 offset-sm-5" [disabled]="!formGroup.valid">chercher</button>
+    </div>   
+
+
+  </form>
