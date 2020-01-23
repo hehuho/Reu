@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import {MatDatepickerInputEvent} from '@angular/material/datepicker';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { HttpClient } from '@angular/common/http';
 import { MatSelectChange } from '@angular/material/select';
 import { EventEmitter } from '@angular/core';
+
 
 export class Flight {
   value: string;
@@ -31,6 +32,10 @@ export class DateReservationComponent implements OnInit {
   configUrl = 'assets/config.json';
   
   dateInput : string;
+  lastName: string;
+  firstName: string;
+  tel: string;
+  address: string;
 
   selectedValue: string;
   selectedValueClasse: string;
@@ -110,5 +115,25 @@ export class DateReservationComponent implements OnInit {
   }
 
   isNumber(val) { return typeof val === 'number'; }
+
+  enterLastName(event: any) {
+    console.log(event.target.value); 
+    this.lastName = event.target.value;
+   }
+  
+   enterFirstName(event: any){
+    console.log(event.target.value); 
+    this.firstName = event.target.value;
+   }
+
+   enterTel(event: any){
+    console.log(event.target.value); 
+    this.tel = event.target.value;
+   }
+
+   enterAdress(event: any){
+    console.log(event.target.value); 
+    this.address = event.target.value;
+   }
 
 }
