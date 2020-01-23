@@ -1,6 +1,15 @@
-<p>date-reservation works!</p>
-<p>C'est cool !</p>
+<h1>Bienvenue sur la compagnie aérienne Reu Airlines</h1>
 
-<input matInput [min]="minDate" [matDatepicker]="picker" placeholder="Date de réservation">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-  <mat-datepicker #picker [startAt]="startDate"></mat-datepicker>
+<p>Vous pouvez réserver en commençant par choisir une date ci-dessous :</p>
+
+<input matInput [min]="minDate" [matDatepicker]="picker" placeholder="Date de réservation"
+            (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)">
+<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+<mat-datepicker #picker [startAt]="startDate"></mat-datepicker>
+
+<button mat-raised-button color="primary">Valider la date de Réservation</button>
+
+<div class="example-events">
+    <!-- <div *ngFor="let e of events">{{e}}</div> -->
+    <p>{{dateInput}}</p>
+</div>

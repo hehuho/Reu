@@ -12,6 +12,8 @@ import {
   MatInputModule
 } from '@angular/material';
 
+import {MatButtonModule} from '@angular/material';
+
 import { DateReservationComponent } from './date-reservation/date-reservation.component';
 
 @NgModule({
@@ -26,7 +28,9 @@ import { DateReservationComponent } from './date-reservation/date-reservation.co
 
     MatNativeDateModule,
     MatInputModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
