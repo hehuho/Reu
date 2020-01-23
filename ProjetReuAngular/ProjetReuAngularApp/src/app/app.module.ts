@@ -6,8 +6,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-
+import {MatSelectModule} from '@angular/material';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { 
   MatDatepickerModule,
@@ -29,13 +29,18 @@ import { DateReservationComponent } from './date-reservation/date-reservation.co
     AppRoutingModule,
     BrowserAnimationsModule,
 
+    MatSelectModule,
+
     MatNativeDateModule,
     MatInputModule,
     MatDatepickerModule,
 
     MatButtonModule,
 
-    HttpClientModule
+    HttpClientModule,
+
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

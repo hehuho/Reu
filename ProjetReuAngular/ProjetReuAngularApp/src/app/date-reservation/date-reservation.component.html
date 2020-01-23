@@ -1,15 +1,32 @@
 <h1>Bienvenue sur la compagnie aérienne Reu Airlines</h1>
 
 <p>Vous pouvez réserver en commençant par choisir une date ci-dessous :</p>
+<mat-form-field>
+    <input matInput [min]="minDate" [matDatepicker]="picker" placeholder="Date de réservation"
+    (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker [startAt]="startDate"></mat-datepicker>
+</mat-form-field>
 
-<input matInput [min]="minDate" [matDatepicker]="picker" placeholder="Date de réservation"
-            (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)">
-<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-<mat-datepicker #picker [startAt]="startDate"></mat-datepicker>
+<div class="example-events">
+    <p>Date sélectionnée : {{dateInput}}</p>
+</div>
 
 <button mat-raised-button color="primary" (click)="onClick($event)">Valider la date de Réservation</button>
 
-<div class="example-events">
-    <!-- <div *ngFor="let e of events">{{e}}</div> -->
-    <p>{{dateInput}}</p>
-</div>
+<br />
+<br />
+<ng-template [ngIf]="flights.length > 0">
+    <mat-form-field>
+        <mat-label>Choix du vol</mat-label>
+        <mat-select [(ngModel)]="selectedValue" name="flight">
+            <mat-option *ngFor="let flight of flights" [value]="flight.value">
+                {{flight.viewValue}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</ng-template>
+
+
+
+
