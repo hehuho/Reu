@@ -2,10 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import { HttpClient } from '@angular/common/http';
+import { MatSelectChange } from '@angular/material/select';
+import { EventEmitter } from '@angular/core';
 
 export class Flight {
   value: string;
   viewValue: string;
+}
+
+export class Classe {
+  value: string;
+  viewValue: string;
+  price: string;
+  flightId: string;
 }
 
 @Component({
@@ -24,7 +33,10 @@ export class DateReservationComponent implements OnInit {
   dateInput : string;
 
   selectedValue: string;
+  selectedValueClasse: string;
   flights: Flight[] = [];
+  classes: Classe[] = [];
+  classesSelected: Classe[] = [];
 
   constructor(private datePipe: DatePipe, private http: HttpClient) { }
 
@@ -55,9 +67,48 @@ export class DateReservationComponent implements OnInit {
         let flight : Flight = { value : result['flightId'].toString(), viewValue :  result['flightName'] };
 
         this.flights.push(flight);
+
+        for(let resultItem of result['classeList']){
+          let classe : Classe = { value : resultItem['classeId'], 
+                                  viewValue : resultItem['name'], 
+                                  price : resultItem['price'],
+                                  flightId : resultItem['flightId']
+                                  };
+          
+          this.classes.push(classe);
+        }
+
       }
+
+      console.log(this.selectedValueClasse);
 
     });
   }
+
+  
+  onFlightSelectionChange(event: EventEmitter<MatSelectChange>){
+    console.log("FlightId : " + `${this.selectedValue}`);
+
+    console.log(this.classes);
+
+    this.classesSelected = [];
+
+    for(let classeItem of this.classes){
+      if(classeItem.flightId == this.selectedValue){
+        this.classesSelected.push(classeItem);
+      }
+    }
+
+    console.log(this.classesSelected);
+    
+    console.log(this.selectedValueClasse);
+
+  }
+
+  onSubmit(){
+    alert("test !");
+  }
+
+  isNumber(val) { return typeof val === 'number'; }
 
 }

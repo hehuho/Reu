@@ -8,24 +8,44 @@
     <mat-datepicker #picker [startAt]="startDate"></mat-datepicker>
 </mat-form-field>
 
+<button mat-raised-button color="primary" (click)="onClick($event)">Valider la date de Réservation</button>
+
 <div class="example-events">
     <p>Date sélectionnée : {{dateInput}}</p>
 </div>
-
-<button mat-raised-button color="primary" (click)="onClick($event)">Valider la date de Réservation</button>
 
 <br />
 <br />
 <ng-template [ngIf]="flights.length > 0">
     <mat-form-field>
         <mat-label>Choix du vol</mat-label>
-        <mat-select [(ngModel)]="selectedValue" name="flight">
+        <mat-select [(ngModel)]="selectedValue" name="flight" (ngModelChange)="onFlightSelectionChange($event)">
             <mat-option *ngFor="let flight of flights" [value]="flight.value">
                 {{flight.viewValue}}
             </mat-option>
         </mat-select>
     </mat-form-field>
+    <p>Vol sélectionné : {{selectedValue}}</p>
 </ng-template>
+
+<ng-template [ngIf]="classesSelected.length > 0">
+    <mat-form-field>
+        <mat-label>Choix de la classe</mat-label>
+        <mat-select [(ngModel)]="selectedValueClasse" name="classe">
+            <mat-option *ngFor="let classe of classesSelected" [value]="classe.value">
+                {{classe.viewValue}} : {{classe.price}} €
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <p>Classe sélectionnée : {{selectedValueClasse}}</p>
+
+</ng-template>
+
+<ng-template [ngIf]="isNumber(selectedValueClasse)">
+    <button mat-raised-button color="primary" (click)="onSubmit($event)">Valider la Réservation</button>
+</ng-template>
+
+
 
 
 
