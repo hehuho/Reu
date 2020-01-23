@@ -112,6 +112,20 @@ export class DateReservationComponent implements OnInit {
 
   onSubmit(){
     alert("test !");
+
+    let reservationPost:JSON = <JSON><unknown>{
+      "ClasseId": this.selectedValueClasse,
+      "NomUtilisateur": this.lastName,
+      "PrenomUtilisateur": this.firstName,
+      "Telephone": this.tel,
+      "Address": this.address,
+      "Date": this.dateInput
+    }
+
+    this.http.post<any>('http://localhost:63708/api/reservation/Submit', reservationPost).subscribe(res => {
+      console.log(res);
+    });
+
   }
 
   isNumber(val) { return typeof val === 'number'; }
