@@ -7,7 +7,7 @@
 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
 <mat-datepicker #picker [startAt]="startDate"></mat-datepicker>
 
-<button mat-raised-button color="primary">Valider la date de Réservation</button>
+<button mat-raised-button color="primary" (click)="onClick($event)">Valider la date de Réservation</button>
 
 <div class="example-events">
     <!-- <div *ngFor="let e of events">{{e}}</div> -->
