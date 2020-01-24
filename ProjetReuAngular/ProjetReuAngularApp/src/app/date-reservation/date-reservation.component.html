@@ -1,0 +1,87 @@
+<h1>Bienvenue sur la compagnie aérienne Reu Airlines</h1>
+
+<p>Veuillez saisir vos coordonnées personnelles ci-dessous :</p>
+
+<mat-form-field style="width: 500px;">
+    <input matInput #messageLastName (change)="enterLastName($event)" maxlength="256" placeholder="Nom">
+    <mat-hint align="start"><strong>Votre nom :</strong> </mat-hint>
+    <mat-hint align="end">{{messageLastName.value}}</mat-hint>
+</mat-form-field>
+
+<mat-form-field style="width: 500px; margin-left: 15px;">
+    <input matInput #messageFirstName (change)="enterFirstName($event)" maxlength="256" placeholder="Prénom">
+    <mat-hint align="start"><strong>Votre prénom :</strong> </mat-hint>
+    <mat-hint align="end">{{messageFirstName.value}}</mat-hint>
+</mat-form-field>
+
+<mat-form-field style="width: 500px;">
+    <input matInput #messageTel (change)="enterTel($event)" maxlength="256" placeholder="N°Tel">
+    <mat-hint align="start"><strong>Votre numéro de téléphone :</strong> </mat-hint>
+    <mat-hint align="end">{{messageTel.value}}</mat-hint>
+</mat-form-field>
+
+<mat-form-field style="width: 500px; margin-left: 15px;">
+    <input matInput #messageAdress (change)="enterAdress($event)" maxlength="256" placeholder="Adresse">
+    <mat-hint align="start"><strong>Votre adresse :</strong> </mat-hint>
+    <mat-hint align="end">{{messageAdress.value}}</mat-hint>
+</mat-form-field>
+
+<br />
+<br />
+<br />
+
+<p>Vous pouvez réserver en commençant par choisir une date ci-dessous :</p>
+<mat-form-field>
+    <input matInput [min]="minDate" [matDatepicker]="picker" placeholder="Date de réservation"
+    (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker [startAt]="startDate"></mat-datepicker>
+</mat-form-field>
+
+<button mat-raised-button color="primary" (click)="onClick($event)">Valider la date de Réservation</button>
+
+<div class="example-events">
+    <p>Date sélectionnée : {{dateInput}}</p>
+</div>
+
+<br />
+<br />
+<ng-template [ngIf]="flights.length > 0">
+    <mat-form-field>
+        <mat-label>Choix du vol</mat-label>
+        <mat-select [(ngModel)]="selectedValue" name="flight" (ngModelChange)="onFlightSelectionChange($event)">
+            <mat-option *ngFor="let flight of flights" [value]="flight.value">
+                {{flight.viewValue}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <p>Vol sélectionné : {{selectedValue}}</p>
+</ng-template>
+
+<ng-template [ngIf]="classesSelected.length > 0">
+
+
+
+    <mat-form-field>
+        <mat-label>Choix de la classe</mat-label>
+        <mat-select [(ngModel)]="selectedValueClasse" name="classe">
+            <mat-option *ngFor="let classe of classesSelected" [value]="classe.value">
+                {{classe.viewValue}} : {{classe.price}} €
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <ng-template [ngIf]="isNumber(selectedValueClasse)">
+        <button mat-raised-button color="primary" (click)="onSubmit($event)">Valider la Réservation</button>
+    </ng-template>
+
+    <p>Classe sélectionnée : {{selectedValueClasse}}</p>
+
+</ng-template>
+
+
+
+
+
+
+

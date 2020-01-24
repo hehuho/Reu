@@ -166,7 +166,8 @@ namespace ProjetReu.Controllers
                     }
 
                     Stock stockToCheck = _stockRepository.getListStock()
-                                                         .Where(st => st.ClasseId == classeIdValue)
+                                                         .Where(st => st.ClasseId == classeIdValue
+                                                                      && st.DateStock == dateValue)
                                                          .SingleOrDefault();
 
                     if (stockToCheck.NbStock > 0)
