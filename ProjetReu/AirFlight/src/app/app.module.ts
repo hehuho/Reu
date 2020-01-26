@@ -9,7 +9,6 @@ import { FormComponent } from './form/form.component';
 import { HomeComponent } from './home/home.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { Form2Component } from './form2/form2.component';
 import { MatDialogModule } from "@angular/material";
 import { DialogComponent } from './dialog/dialog.component';
 
@@ -33,7 +32,6 @@ const appRoutes: Routes = [
     FooterComponent,
     FormComponent,
     HomeComponent,
-    Form2Component,
     DialogComponent
   ],
   imports: [

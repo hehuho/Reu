@@ -57,7 +57,7 @@ export class FormComponent implements OnInit {
 
       let date = this.datepipe.transform(new Date(), 'yyyy-MM-dd');
       if (this.formGroup.get('Date').value < date) {
-        this.dialogOpen("La date doit etre supérieure ou égale à la date d'aujourd'hui");
+        this.dialogOpen("La date doit etre supérieure ou égale à la date d'aujourd'hui", 'Oups');
       }
       else {
         this.service.datePost(this.formGroup.value).subscribe(data => {
@@ -68,7 +68,7 @@ export class FormComponent implements OnInit {
           this.showClasses = true;
           this.selectedFlight = this.flights[0];
         }, error => {
-          this.dialogOpen(error.message);
+          this.dialogOpen(error.message, 'Oups');
 
         });
       }
@@ -77,13 +77,13 @@ export class FormComponent implements OnInit {
     else {
       console.log(this.formGroup.get('Flight'));
       if (!this.formGroup.get('Flight').value || !this.formGroup.get('ClasseId').value)
-        this.dialogOpen('tout les champs doivent etre renseignés');
+        this.dialogOpen('tout les champs doivent etre renseignés', 'Oups');
       else {
 
         this.service.ReservePost(this.formGroup.value).subscribe(data => {
-          this.dialogOpen(data.message);
+          this.dialogOpen(data.message, 'Félicitation');
         }, error => {
-          this.dialogOpen(error.message);
+          this.dialogOpen(error.message,'Oups');
 
         });
       }
@@ -96,11 +96,11 @@ export class FormComponent implements OnInit {
 
 
 
-  dialogOpen(contain : string) {
+  dialogOpen(contain : string, title : string) {
     this.dialog.open(DialogComponent, {
-      data: { contain: contain },
-      height: '400px',
-      width: '600px',
+      data: { title : title, contain: contain },
+      height: '40%',
+      width: '50%',
     });
 
   }
