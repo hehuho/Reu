@@ -8,6 +8,4 @@ export class Flights{
     nbSiege: number;
     price: number;
   }
-
-
 }

@@ -14,6 +14,7 @@ import { MatDialogModule } from "@angular/material";
 import { DialogComponent } from './dialog/dialog.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DatePipe } from '@angular/common';
 
 
 const appRoutes: Routes = [
@@ -48,7 +49,7 @@ const appRoutes: Routes = [
   entryComponents: [
     DialogComponent,
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

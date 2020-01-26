@@ -19,21 +19,19 @@ export class RestService {
 
 
 
- /* datePost_(data: FormGroup): Observable<any> {
-
-    let params = new HttpParams();
-    params = params.append('date', val1);
-
-    return this.http.get(this.baseurl +'/api/returnList', )
-  }*/
-  
-
 datePost(data : FormGroup) : Observable <any>{
   return this.http.post<any>(this.baseurl +'/api/reservation/returnList', JSON.stringify(data), this.httpOptions).pipe(
   catchError(this.errorHandl));
 
 
 }
+
+ReservePost(data: FormGroup): Observable<any> {
+  return this.http.post<any>(this.baseurl + '/api/reservation/submit', JSON.stringify(data), this.httpOptions).pipe(
+      catchError(this.errorHandl));
+
+
+  }
 
 
 
@@ -48,7 +46,7 @@ errorHandl(error) {
     errorMessage = 'client ', error.error.message;
   } else {
     // Get server-side error
-    errorMessage = `server Error Code: ${error.status}\nMessage: ${error.message}`;
+    errorMessage = `server Error Code: ${error.status}\n Message: ${error.message}`;
   }
   console.log(errorMessage);
   return throwError(errorMessage);
