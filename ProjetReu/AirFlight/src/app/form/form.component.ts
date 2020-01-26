@@ -15,11 +15,11 @@ import { DialogComponent } from '../dialog/dialog.component';
 })
 export class FormComponent implements OnInit {
   formGroup: FormGroup;
-  showFlights: boolean = false;
-  showClasses: boolean = false;
+  showFlights: boolean;
+  showClasses: boolean;
 
   flights: Array<Flights>;
-  selectedFlight: Flights = null; 
+  selectedFlight: Flights; 
 
 
   constructor(private service: RestService, private dialog: MatDialog) { }
@@ -37,21 +37,17 @@ export class FormComponent implements OnInit {
     
     })
 
+    this.showFlights = false, this.showClasses = false, this.selectedFlight = null
+
+
   }
 
 
 
   onFlightSelected(value: any) {
-    console.log('onflightSelected is here ');
-    if (value != "") {
-      this.showClasses = true;
+   
       this.selectedFlight = value;
-    } else {
-      this.showClasses = false;
-      this.selectedFlight = null;
-
-
-    }
+    
   }
 
   validation() {
@@ -64,6 +60,8 @@ export class FormComponent implements OnInit {
       this.flights = data;
       
       this.showFlights = true;
+      this.showClasses = true;
+      this.selectedFlight = this.flights[0];
     }, error => {
       this.dialog.open(DialogComponent, {
         data: { contain : error.message }, 

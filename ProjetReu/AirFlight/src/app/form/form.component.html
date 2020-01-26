@@ -35,21 +35,18 @@
     <label for="vol" class="col-sm-2 offset-sm-2">Vol</label>
     
     <select id="vol" class="form-control col-sm-3 offset-sm-1" [(ngModel)]="selectedFlight" (ngModelChange)='onFlightSelected($event)' formControlName="Flight">
-      <option value=""></option>
-
       <option *ngFor="let flight of flights" [ngValue]="flight">{{flight.flightName}}</option>
     </select>
 
   </div>
 
-  <!-- coordination should be done -->
 
   <div class="form-group row" *ngIf="showClasses">
     <label for="classe" class="col-sm-2 offset-sm-2">Classe</label>
-    <select class="form-control col-sm-3 offset-sm-1">
+    <select class="form-control col-sm-3 offset-sm-1">    
 
       
-      <option *ngFor="let classe of selectedFlight.classeList" [ngValue]="classe" id="classe">{{classe.name}}, {{classe.price}} Eu</option>
+      <option *ngFor="let classe of selectedFlight.classeList" [ngValue]="classe" id="classe">{{classe.name}}, {{classe.price}} Euros</option>
     </select>
 
   </div>
