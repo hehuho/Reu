@@ -9,7 +9,11 @@ import { FormComponent } from './form/form.component';
 import { HomeComponent } from './home/home.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { Form2Component } from './form2/form2.component';
+import { MatDialogModule } from "@angular/material";
+import { DialogComponent } from './dialog/dialog.component';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 const appRoutes: Routes = [
@@ -27,16 +31,22 @@ const appRoutes: Routes = [
     NavbarComponent,
     FooterComponent,
     FormComponent,
-    HomeComponent
+    HomeComponent,
+    Form2Component,
+    DialogComponent
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
     AppRoutingModule, RouterModule.forRoot(
     appRoutes,
-    { enableTracing: true } // <-- debugging purposes only
-    )
+      { enableTracing: true } 
+    ), MatDialogModule
+  ],
+  entryComponents: [
+    DialogComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]
