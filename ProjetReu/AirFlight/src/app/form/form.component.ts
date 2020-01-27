@@ -81,7 +81,20 @@ export class FormComponent implements OnInit {
       else {
 
         this.service.ReservePost(this.formGroup.value).subscribe(data => {
-          this.dialogOpen(data.message, 'Félicitations');
+/*          this.dialogOpen(data.message, 'Félicitations');
+*/          const dialogRef = this.dialog.open(DialogComponent, {
+              data: { title: data.message, contain: 'Félicitations' },
+              height: '30%',
+              width: '50%',
+            });
+          dialogRef.afterClosed().subscribe(() => {
+            this.showFlights = false;
+            this.showClasses = false;
+            this.formGroup.controls['Flight'].setValue("");
+            this.formGroup.controls['ClasseId'].setValue("");
+            this.button = 'chercher';
+          });
+
 
         }, error => {
           this.dialogOpen(error.message,'Oups');
