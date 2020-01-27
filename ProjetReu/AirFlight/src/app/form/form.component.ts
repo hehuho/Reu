@@ -75,8 +75,9 @@ export class FormComponent implements OnInit {
     }
     //second submit (making a reservation)
     else {
-      console.log(this.formGroup.get('Flight'));
-      if (!this.formGroup.get('Flight').value || !this.formGroup.get('ClasseId').value)
+     
+
+      if (!this.formGroup.get('Flight').value.flightId || !this.formGroup.get('ClasseId').value)
         this.dialogOpen('tout les champs doivent etre renseignés', 'Oups');
       else {
 
