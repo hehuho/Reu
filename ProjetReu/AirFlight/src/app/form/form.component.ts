@@ -19,7 +19,9 @@ export class FormComponent implements OnInit {
   showClasses: boolean;
   button: string;
   flights: Array<Flights>;
-  selectedFlight: Flights; 
+  selectedFlight: Flights;
+  //to control date changing
+  currentSelectedDate: string;
 
 
   constructor(private service: RestService, private dialog: MatDialog, public datepipe: DatePipe) { }
@@ -39,7 +41,7 @@ export class FormComponent implements OnInit {
 
     this.showFlights = false, this.showClasses = false, this.selectedFlight = null
     this.button = 'chercher';
-
+    this.currentSelectedDate = '';
   }
 
 
@@ -53,13 +55,14 @@ export class FormComponent implements OnInit {
   validation() {
     
     //first submit (getting flights)
-    if (!this.formGroup.get('Flight').value) {
+    if (!this.formGroup.get('Flight').value || (this.formGroup.get('Date').value != this.currentSelectedDate)) {
 
       let date = this.datepipe.transform(new Date(), 'yyyy-MM-dd');
       if (this.formGroup.get('Date').value < date) {
         this.dialogOpen("La date doit etre supérieure ou égale à la date d'aujourd'hui", 'Oups');
       }
       else {
+        this.currentSelectedDate = this.formGroup.get('Date').value;
         this.service.datePost(this.formGroup.value).subscribe(data => {
           this.flights = data;
           this.button = 'réserver';
