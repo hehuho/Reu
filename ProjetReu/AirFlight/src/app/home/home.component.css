@@ -1,0 +1,25 @@
+.corp {
+  background-image: url("/assets/img1.jpg");
+  background-size: cover;
+  opacity: 0.95;
+  height : 100%;
+}
+
+h2, h4, h6{
+    padding : 3vh;
+}
+.block {
+  background-color: rgb(223, 238, 245);
+  height: 63%;
+  width: 50%;
+  margin: 0vh 25vw;
+  border-radius: 10px 10px;
+}
+@media only screen and (max-width: 750px) {
+  .block {
+    background-color: aliceblue;
+    height: 50%;
+    width: 90%;
+    margin: 0vh 5vw;
+  }
+}

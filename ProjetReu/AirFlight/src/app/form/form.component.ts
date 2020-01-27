@@ -17,7 +17,7 @@ export class FormComponent implements OnInit {
   formGroup: FormGroup;
   showFlights: boolean;
   showClasses: boolean;
-
+  button: string;
   flights: Array<Flights>;
   selectedFlight: Flights; 
 
@@ -38,7 +38,7 @@ export class FormComponent implements OnInit {
     })
 
     this.showFlights = false, this.showClasses = false, this.selectedFlight = null
-
+    this.button = 'chercher';
 
   }
 
@@ -51,7 +51,7 @@ export class FormComponent implements OnInit {
   }
 
   validation() {
-
+    
     //first submit (getting flights)
     if (!this.formGroup.get('Flight').value) {
 
@@ -61,8 +61,8 @@ export class FormComponent implements OnInit {
       }
       else {
         this.service.datePost(this.formGroup.value).subscribe(data => {
-          console.log(data);
           this.flights = data;
+          this.button = 'réserver';
 
           this.showFlights = true;
           this.showClasses = true;
@@ -75,14 +75,14 @@ export class FormComponent implements OnInit {
     }
     //second submit (making a reservation)
     else {
-     
 
       if (!this.formGroup.get('Flight').value.flightId || !this.formGroup.get('ClasseId').value)
         this.dialogOpen('tout les champs doivent etre renseignés', 'Oups');
       else {
 
         this.service.ReservePost(this.formGroup.value).subscribe(data => {
-          this.dialogOpen(data.message, 'Félicitation');
+          this.dialogOpen(data.message, 'Félicitations');
+
         }, error => {
           this.dialogOpen(error.message,'Oups');
 
